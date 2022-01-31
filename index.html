@@ -73,19 +73,17 @@
   }
 
   
-    function create(name, id){
+    async function create(name, id){
+      await navigator.clipboard.writeText(`${str + name}`);
       w = window.open();
       w.document.write(`
-        <a href="#" onclick ="navigator.clipboard.writeText('${str + name}'); return false;"">${name}</a><br>
         <iframe src="https://drive.google.com/file/d/${id}/preview" width="1920" height="1080" allow="autoplay"></iframe>
       `);
     }
 
-    function create2(name, id){
-      w = window.open();
-      w.document.write(`
-        <a href="https://drive.google.com/u/0/uc?id=${id}&export=download" onclick ="navigator.clipboard.writeText('${str + name}');">${name}</a><br>
-      `);
+    async function create2(name, id){
+      await navigator.clipboard.writeText(`${str + name}`);
+      window.open(`https://drive.google.com/u/0/uc?id=${id}&export=download`);
     }
   </script>
 </body>
