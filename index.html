@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <title>test/video1</title>
+  <style>
+      a {
+        margin-bottom: 5px;
+        background-color: #4CAF50; /* Green */
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+      }
+  </style>
+</head>
+<body>
+  <!-- <iframe src="https://drive.google.com/file/d/1SwZHpMJWXURuHzSn7BYCGJ3gjD8efPBj/preview" width="640" height="480" allow="autoplay"></iframe> -->
+  <script>
+    var lines = [];
+    $(document).ready(function() {
+    $.ajax({
+        type: "GET",
+        url: "GET_LINK - temp.csv",
+        dataType: "text",
+        success: function(data) {processData(data);}
+     });
+    });
+    function processData(allText) {
+    var allTextLines = allText.split(/\r\n|\n/);
+    //var headers = allTextLines[0].split(',');
+
+    for (var i=0; i<allTextLines.length; i++) {
+        var data = allTextLines[i].split(',');
+        //if (data.length == headers.length) {
+
+            var tarr = [];
+            for (var j=0; j<2; j++) {
+                tarr.push(data[j]);
+            }
+            lines.push(tarr);
+        //}
+    }
+    //console.log(lines);
+    lines.forEach((value) => {
+      $("body")
+      .append(
+        `<a href="#" onclick ="create('${value[0].replace(':', '-').replace('|', '-')}','${value[1]}'); return false;"">${value[0].replace(':', '-').replace('|', '-')}</a>
+         </br>
+         `);
+    })
+  }
+
+
+    function create(name, id){
+      w = window.open();
+      w.document.write(`
+        <a href="#" onclick ="navigator.clipboard.writeText(' H:/My Drive/01. Của toàn nè/Khoá học onl/Hoá/TYHH/2. LIVE T CHUYÊN ĐỀ/CHƯƠNG 1 ESTE - LIPIT (LIVE 1 - LIVE 17)/${name}'); return false;"">${name}</a><br>
+        <iframe src="https://drive.google.com/file/d/${id}/preview" width="1920" height="1080" allow="autoplay"></iframe>
+      `);
+    }
+  </script>
+</body>
+</html>
