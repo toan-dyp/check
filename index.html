@@ -56,20 +56,35 @@
     }
     //console.log(lines);
     lines.forEach((value) => {
-      $("body")
-      .append(
+      if(value[0].includes(".mp4") == true)
+        $("body")
+        .append(
         `<a href="#" onclick ="create('${value[0].replace(':', '-')}','${value[1]}'); return false;"">${value[0].replace(':', '-')}</a>
          </br>
-         `)
+         `);
+      else {
+        $("body")
+        .append(
+        `<a href="#" onclick ="create2('${value[0].replace(':', '-')}','${value[1]}'); return false;"">${value[0].replace(':', '-')}</a>
+         </br>
+         `);
+      }
     })
   }
 
-
+  
     function create(name, id){
       w = window.open();
       w.document.write(`
         <a href="#" onclick ="navigator.clipboard.writeText('${str + name}'); return false;"">${name}</a><br>
         <iframe src="https://drive.google.com/file/d/${id}/preview" width="1920" height="1080" allow="autoplay"></iframe>
+      `);
+    }
+
+    function create2(name, id){
+      w = window.open();
+      w.document.write(`
+        <a href="https://drive.google.com/u/0/uc?id=${id}&export=download" onclick ="navigator.clipboard.writeText('${str + name}');">${name}</a><br>
       `);
     }
   </script>
