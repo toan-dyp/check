@@ -49,6 +49,7 @@
     }
     //console.log(lines);
     lines.forEach((value) => {
+      if(value[0].search(".mp4") != -1 )
       $("body")
       .append(
         `<a href="#" onclick ="create('${value[0].replace(':', '-').replace('|', '-')}','${value[1]}'); return false;"">${value[0].replace(':', '-').replace('|', '-')}</a>
